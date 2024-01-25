@@ -50,7 +50,10 @@ jobs:
           npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/build/intermediates/assets/release/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/release
 
       - name: Build Android Release
-        run: cd android && ./gradlew bundleRelease
+        run: |
+          cd android
+          chmod +x gradlew 
+          ./gradlew bundleRelease
 
   download_bundle:
     runs-on: ubuntu-latest
