@@ -59,7 +59,7 @@ jobs:
         run: |
           cd android
           chmod +x gradlew 
-          ./gradlew bundleRelease
+          ./gradlew bundleRelease -Pkeystore.password=${{ secrets.KEYSTORE_PASSWORD }}
 
   download_bundle:
     runs-on: ubuntu-latest
