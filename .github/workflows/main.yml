@@ -13,8 +13,38 @@ jobs:
             - name: Checkout Repository
               uses: actions/checkout@v2
 
-            - name: Install Dependencies
-              run: yarn install
+            - name: Setup Node.js
+              uses: actions/setup-node@v2
+              with:
+                node-version: 14
+      
+            - name: Install dependencies
+              run: npm install
+      
+            - name: Run tests
+              run: npm test
 
-            - name: Run Tests
-              run: yarn test
+
+    deploy:
+      runs-on: ubunt-latest
+      
+      needs: build
+      
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v2
+          
+        - name: Setup Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: 14
+
+        - name: Install Firebase CLI
+          run: npm imstall -g firebase-tools
+
+        - name: Deploy to Firebase Hosting
+          run: |
+            firebase use --token=${{ secrets.FIREBASE_TOKEN }}
+            firbase deploy --only hosting
+          env: 
+            FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
