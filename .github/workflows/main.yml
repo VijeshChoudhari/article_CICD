@@ -39,6 +39,9 @@ jobs:
           with:
             node-version: 18.19.0
 
+        - name: Navigate to Project Root
+          run: cd $GITHUB_WORKSPACE
+
         - name: Install Firebase CLI
           run: npm install -g firebase-tools
 
