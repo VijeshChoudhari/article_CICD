@@ -45,7 +45,9 @@ jobs:
         run: npm install
 
       - name: Build Android App Bundle
-        run: npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/build/intermediates/assets/release/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/release
+        run: |
+          mkdir -p android/app/build/intermediates/assets/release/
+          npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/build/intermediates/assets/release/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/release
 
       - name: Build Android Release
         run: cd android && ./gradlew bundleRelease
