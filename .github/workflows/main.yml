@@ -62,19 +62,19 @@ jobs:
           ./gradlew clean
           ./gradlew bundleRelease -Pkeystore.password=${{ secrets.KEYSTORE_PASSWORD }}
 
-  download_bundle:
-    runs-on: ubuntu-latest
+  # download_bundle:
+  #   runs-on: ubuntu-latest
 
-    needs: build_android
+  #   needs: build_android
 
-    steps:
-      - name: Download Android App Bundle
-        run: |
-          mkdir -p $GITHUB_WORKSPACE/dist
-          cp $GITHUB_WORKSPACE/android/app/build/outputs/bundle/release/app-release.aab $GITHUB_WORKSPACE/dist
+  #   steps:
+  #     - name: Download Android App Bundle
+  #       run: |
+  #         mkdir -p $GITHUB_WORKSPACE/dist
+  #         cp $GITHUB_WORKSPACE/android/app/build/outputs/bundle/release/app-release.aab $GITHUB_WORKSPACE/dist
 
-      - name: Archive Bundle
-        uses: actions/upload-artifact@v2
-        with:
-          name: android-bundle
-          path: $GITHUB_WORKSPACE/dist
+  #     - name: Archive Bundle
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: android-bundle
+  #         path: $GITHUB_WORKSPACE/dist
